@@ -40,8 +40,8 @@ Press multiple times to tooggle between the two.
 
 Not much is implemented yet, but plan is to be able to transition between:
 
- - endless_method -> normal_method :+1:
- - normal_method -> endless_method :+1:
+ - endless_method -> normal_method &#x2705;
+ - normal_method -> endless_method &#x2705;
  - multiline_do_end -> single_line_curly_block
  - single_line_curly_block -> multiline_do_end  
  - single_line_parameter_list -> muliline_parameter_list
