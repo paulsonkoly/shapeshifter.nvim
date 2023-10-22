@@ -6,7 +6,7 @@ Changes code shape / style toggling between implementation variants. For example
    def foo(x = 13, y: 14) = @x + x - @y + y
    ```
 
-position over the method definition anywhere, and trigger `shapeshifter.shiftshape`. You should get the following rewrite:
+position anywhere in the method definition, and trigger `shapeshifter.shiftshape`. You will get the following rewrite:
 
 
    ```ruby
