@@ -1,5 +1,5 @@
 local ts_utils = require("nvim-treesitter.ts_utils")
-local utils = require("utils")
+local utils = require("shapeshifter.utils")
 
 --[[                                     def foo(a, b = 13)
   def foo(a, b = 13) = @x       ->         @x

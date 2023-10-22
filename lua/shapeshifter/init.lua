@@ -5,7 +5,7 @@ grab curr pos -> ts_node -> walk upwards until 1 match -> execute corresponding
 action.
 --]]
 
-local endless_method = require("shifters.endless_method")
+local endless_method = require("shapeshifter.shifters.endless_method")
 
 m.shifters = { endless_method }
 
