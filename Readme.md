@@ -15,6 +15,25 @@ position over the method definition anywhere, and trigger `shapeshifter.shiftsha
    end
    ```
 
+## Installation
+
+### Packer
+
+   ```lua
+   use {
+     'phaul/shapeshifter.nvim',
+     requires = { { 'nvim-treesitter/nvim-treesitter' } }
+   }
+   ```
+
+### Setup
+
+   ```lua
+   local shifter = require("shapeshifter")
+
+   vim.keymap.set("n", "<leader>t", shifter.shiftshapes)
+   ```
+
 ## Plans
 
 Not much is implemented yet, but plan is to be able to transition between:
