@@ -58,3 +58,7 @@ Maybe more languages. Maybe more features. As of now, it's early days.
 ## Technology
 
 Treesitter. Lua. Nvim
+
+## Credits
+
+Inspired by [splitjoin](https://github.com/AndrewRadev/splitjoin.vim)
