@@ -6,8 +6,9 @@ action.
 --]]
 
 local endless_method = require("shapeshifter.shifters.endless_method")
+local method = require("shapeshifter.shifters.method")
 
-m.shifters = { endless_method }
+m.shifters = { endless_method, method }
 
 m.shiftshapes = function()
   for _, shifter in ipairs(m.shifters) do
