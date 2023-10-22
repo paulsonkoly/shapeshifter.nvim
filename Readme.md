@@ -36,6 +36,12 @@ Press multiple times to tooggle between the two.
    vim.keymap.set("n", "<leader>t", shifter.shiftshapes)
    ```
 
+## Usage
+
+shapeshifter utilises treesitter to get access to the document AST. It starts from the current cursor position and looks at the AST node containing the cursor position directly. It checks if it can do any transformation with the node, otherwise it looks for the parent node. It walks the node hierarchy to the root node, checking if the node in focus could be shape shifted. It stops at the first node it finds, and executes the transformation.
+
+Thus if the cursor position is contained within multiple AST nodes that could be transformed, the transformation will only happen for the innermost node. For example a method might be transformed to be endless method, or the argument list might be transformed to be multi line. As the argument list is contained by the method, that is the one that will be executed. 
+
 ## Plans
 
 Not much is implemented yet, but plan is to be able to transition between:
