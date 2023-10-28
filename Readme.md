@@ -15,7 +15,7 @@ position anywhere in the method definition, and trigger `shapeshifter.shiftshape
    end
    ```
 
-Press multiple times to tooggle between the two.
+Press multiple times to toggle between the two.
 
 ## Installation
 
