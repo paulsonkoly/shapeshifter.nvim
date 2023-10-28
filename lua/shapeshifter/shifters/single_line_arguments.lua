@@ -1,16 +1,14 @@
 local utils = require("shapeshifter.utils")
 
---[[ def foo(a,                           def foo(a, b = 13)
---           b = 13)                         @
-       @x                      ->         end
-     end
+--[[ foo(a,           -->                foo(a, b)
+--       b)
 --]]
 local single_line_arguments = {
   match = function(current_node)
     if current_node:type() == "argument_list" then
       local arguments = {}
 
-      -- otherwise multiline params
+      -- otherwise multiline arguments
       if utils.node_line_count(current_node) > 1 then
         return nil
       end
