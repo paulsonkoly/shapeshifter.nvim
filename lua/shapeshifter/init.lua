@@ -12,8 +12,13 @@ local single_body_condition = require("shapeshifter.shifters.single_body_conditi
 local postfix_condition = require("shapeshifter.shifters.postfix_condition")
 local do_block = require("shapeshifter.shifters.do_block")
 local curly_block = require("shapeshifter.shifters.curly_block")
+local multi_line_arguments = require("shapeshifter.shifters.multi_line_arguments")
+local single_line_arguments = require("shapeshifter.shifters.single_line_arguments")
 
 m.shifters = {
+  -- order matters, smaller node should come first
+  multi_line_arguments,
+  single_line_arguments,
   endless_method,
   method,
   single_body_condition,
