@@ -7,33 +7,27 @@ local utils = require("shapeshifter.utils")
   end
 --]]
 local single_body_condition = {
-  match = function()
-    local current_node = ts_utils.get_node_at_cursor()
-    while current_node ~= nil do
-      if current_node:type() == "if" or current_node:type() == "unless" then
-        local condition = utils.node_children_by_name("condition", current_node)
-        local consequence = utils.node_children_by_name("consequence", current_node)
-        local alternative = utils.node_children_by_name("alternative", current_node)
+  match = function(current_node)
+    if current_node:type() == "if" or current_node:type() == "unless" then
+      local condition = utils.node_children_by_name("condition", current_node)
+      local consequence = utils.node_children_by_name("consequence", current_node)
+      local alternative = utils.node_children_by_name("alternative", current_node)
 
-        if #condition == 1 and #consequence == 1 and #alternative == 0 then
-          if consequence[1]:child_count() == 1 then
-            local consequence_body = consequence[1]:child(0)
+      if #condition == 1 and #consequence == 1 and #alternative == 0 then
+        if consequence[1]:child_count() == 1 then
+          local consequence_body = consequence[1]:child(0)
 
-            if (utils.node_line_count(condition[1]) == 1 and
-                  utils.node_line_count(consequence_body) == 1) then
-              return {
-                target = current_node,
-                condition = condition[1],
-                consequence = consequence_body
-              }
-            end
+          if (utils.node_line_count(condition[1]) == 1 and
+                utils.node_line_count(consequence_body) == 1) then
+            return {
+              target = current_node,
+              condition = condition[1],
+              consequence = consequence_body
+            }
           end
         end
       end
-
-      current_node = current_node:parent()
     end
-    return nil
   end,
 
   shift = function(data)

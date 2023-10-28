@@ -46,8 +46,8 @@ Thus if the cursor position is contained within multiple AST nodes that could be
 
 Not much is implemented yet, but plan is to be able to transition between:
 
- - endless_method -> normal_method &#x2705;
- - normal_method -> endless_method &#x2705;
+ - endless method <-> single line method &#x2705;
+ - single body condition <-> postfix condition &#x2705;
  - multiline_do_end -> single_line_curly_block
  - single_line_curly_block -> multiline_do_end  
  - single_line_parameter_list -> muliline_parameter_list
