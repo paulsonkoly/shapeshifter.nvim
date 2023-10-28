@@ -1,3 +1,4 @@
+local ts_utils = require("nvim-treesitter.ts_utils")
 local m = {}
 
 --[[
@@ -13,13 +14,18 @@ m.shifters = { endless_method, method, single_body_condition }
 
 m.shiftshapes = function()
   for _, shifter in ipairs(m.shifters) do
-    local node = shifter.match()
-    if node ~= nil then
-      shifter.shift(node)
-      return
+    local current_node = ts_utils.get_node_at_cursor()
+
+    while current_node do
+      local data = shifter.match(current_node)
+      if data then
+        shifter.shift(data)
+        return
+      end
+      current_node = current_node:parent()
     end
+    print("no shapeshifter found a match :(")
   end
-  print("no shapeshifter found a match :(")
 end
 
 return m
