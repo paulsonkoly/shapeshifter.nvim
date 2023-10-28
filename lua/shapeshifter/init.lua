@@ -34,8 +34,9 @@ m.shiftshapes = function()
       end
       current_node = current_node:parent()
     end
-    print("no shapeshifter found a match :(")
   end
+
+  print("no shapeshifter found a match :(")
 end
 
 return m
