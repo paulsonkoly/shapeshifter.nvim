@@ -8,7 +8,9 @@ local utils = {
   node_indentation = function(node)
     local buf = vim.api.nvim_get_current_buf()
     local srow, scol, _, _ = node:range()
-    return vim.api.nvim_buf_get_text(buf, srow, 0, srow, scol, {})[1]
+    local prefix = vim.api.nvim_buf_get_text(buf, srow, 0, srow, scol, {})[1]
+    local _, _, indent = prefix:find("^([ \t]*)")
+    return indent
   end,
 
   node_line_count = function(node)

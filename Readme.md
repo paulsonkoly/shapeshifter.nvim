@@ -48,8 +48,7 @@ Not much is implemented yet, but plan is to be able to transition between:
 
  - endless method <-> single line method &#x2705;
  - single body condition <-> postfix condition &#x2705;
- - multiline_do_end -> single_line_curly_block
- - single_line_curly_block -> multiline_do_end  
+ - single line do block <-> one liner curly brace block &#x2705;
  - single_line_parameter_list -> muliline_parameter_list
  - muliline_parameter_list -> single_line_parameter_list
 
