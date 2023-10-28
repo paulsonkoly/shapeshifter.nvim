@@ -9,7 +9,6 @@ local utils = require("shapeshifter.utils")
 local postfix_condition = {
   match = function(current_node)
     if current_node:type() == "if_modifier" or current_node:type() == "unless_modifier" then
-      print("boo!")
       local condition = utils.node_children_by_name("condition", current_node)
       local body = utils.node_children_by_name("body", current_node)
 
