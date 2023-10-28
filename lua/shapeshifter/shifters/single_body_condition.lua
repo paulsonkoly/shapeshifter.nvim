@@ -34,9 +34,9 @@ local single_body_condition = {
         data.target, data.condition, data.consequence
 
     local line =
-        utils.get_node_rows(consequence)[1] .. " "
+        utils.node_rows(consequence)[1] .. " "
         .. node:type() .. " "
-        .. utils.get_node_rows(condition)[1]
+        .. utils.node_rows(condition)[1]
 
     utils.node_replace_with_lines(node, { line })
   end

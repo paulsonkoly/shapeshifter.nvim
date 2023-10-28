@@ -32,12 +32,12 @@ local method = {
     local node, name, parameters, body = data.target,
         data.name, data.parameters, data.body
 
-    local line = "def " .. utils.get_node_rows(name)[1]
+    local line = "def " .. utils.node_rows(name)[1]
     if parameters then
-      line = line .. utils.get_node_rows(parameters)[1]
+      line = line .. utils.node_rows(parameters)[1]
     end
     line = line .. " = "
-    line = line .. utils.get_node_rows(body)[1]
+    line = line .. utils.node_rows(body)[1]
 
     utils.node_replace_with_lines(node, { line })
   end

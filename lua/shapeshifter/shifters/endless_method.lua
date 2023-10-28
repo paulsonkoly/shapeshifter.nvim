@@ -31,15 +31,15 @@ local endless_method = {
   shift = function(data)
     local node, name, parameters, body = data.target,
         data.name, data.parameters, data.body
-    local indent = utils.get_node_indentation(node)
+    local indent = utils.node_indentation(node)
 
-    local header = "def " .. utils.get_node_rows(name)[1]
+    local header = "def " .. utils.node_rows(name)[1]
     if parameters then
-      header = header .. utils.get_node_rows(parameters)[1]
+      header = header .. utils.node_rows(parameters)[1]
     end
     local replacement = { header }
 
-    replacement[#replacement + 1] = indent .. "  " .. utils.get_node_rows(body)[1]
+    replacement[#replacement + 1] = indent .. "  " .. utils.node_rows(body)[1]
     replacement[#replacement + 1] = indent .. "end"
 
     utils.node_replace_with_lines(node, replacement)
