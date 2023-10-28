@@ -42,9 +42,7 @@ local endless_method = {
     replacement[#replacement + 1] = indent .. "  " .. utils.get_node_rows(body)[1]
     replacement[#replacement + 1] = indent .. "end"
 
-    local buf = vim.api.nvim_get_current_buf()
-    local srow, scol, erow, ecol = node:range()
-    vim.api.nvim_buf_set_text(buf, srow, scol, erow, ecol, replacement)
+    utils.node_replace_with_lines(node, replacement)
   end
 }
 

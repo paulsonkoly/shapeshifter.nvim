@@ -25,6 +25,12 @@ local utils = {
       end
     end
     return result
+  end,
+
+  node_replace_with_lines = function(node, replacement)
+    local buf = vim.api.nvim_get_current_buf()
+    local srow, scol, erow, ecol = node:range()
+    vim.api.nvim_buf_set_text(buf, srow, scol, erow, ecol, replacement)
   end
 }
 

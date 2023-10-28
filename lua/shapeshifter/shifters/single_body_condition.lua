@@ -34,16 +34,12 @@ local single_body_condition = {
     local node, condition, consequence =
         data.target, data.condition, data.consequence
 
-    local replacement =
+    local line =
         utils.get_node_rows(consequence)[1] .. " "
         .. node:type() .. " "
         .. utils.get_node_rows(condition)[1]
 
-    replacement = { replacement }
-
-    local buf = vim.api.nvim_get_current_buf()
-    local srow, scol, erow, ecol = node:range()
-    vim.api.nvim_buf_set_text(buf, srow, scol, erow, ecol, replacement)
+    utils.node_replace_with_lines(node, { line })
   end
 }
 

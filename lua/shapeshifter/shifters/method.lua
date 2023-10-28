@@ -33,18 +33,14 @@ local method = {
     local node, name, parameters, body = data.target,
         data.name, data.parameters, data.body
 
-    local header = "def " .. utils.get_node_rows(name)[1]
+    local line = "def " .. utils.get_node_rows(name)[1]
     if parameters then
-      header = header .. utils.get_node_rows(parameters)[1]
+      line = line .. utils.get_node_rows(parameters)[1]
     end
-    header = header .. " = "
-    header = header .. utils.get_node_rows(body)[1]
+    line = line .. " = "
+    line = line .. utils.get_node_rows(body)[1]
 
-    local replacement = { header }
-
-    local buf = vim.api.nvim_get_current_buf()
-    local srow, scol, erow, ecol = node:range()
-    vim.api.nvim_buf_set_text(buf, srow, scol, erow, ecol, replacement)
+    utils.node_replace_with_lines(node, { line })
   end
 }
 
