@@ -1,11 +1,8 @@
 local sh = require("shapeshifter")
+local buf_set_content = require("shapeshifter.utils").buf_set_content
 
 describe("method shifter", function()
   vim.cmd("set filetype=ruby")
-
-  after_each(function()
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
-  end)
 
   describe("with a simple one line method", function()
     local lines = {
@@ -13,7 +10,7 @@ describe("method shifter", function()
       "  puts a + b",
       "end"
     }
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    buf_set_content(lines)
 
     it("rewrites the method to be endless", function()
       sh.shiftshapes()
@@ -32,7 +29,7 @@ describe("method shifter", function()
       "  return 13",
       "end"
     }
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    buf_set_content(lines)
 
     it("does not rewrite the method", function()
       sh.shiftshapes()

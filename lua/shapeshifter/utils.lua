@@ -33,6 +33,14 @@ local utils = {
     local buf = vim.api.nvim_get_current_buf()
     local srow, scol, erow, ecol = node:range()
     vim.api.nvim_buf_set_text(buf, srow, scol, erow, ecol, replacement)
+  end,
+
+  -- used only in testing
+  buf_set_content = function(content)
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, content)
+
+    local parser = vim.treesitter.get_parser(0)
+    parser:parse()
   end
 }
 
