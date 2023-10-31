@@ -9,8 +9,10 @@ local do_block = {
     if current_node:type() == "do_block" then
       local parameters = utils.node_children_by_name("parameters", current_node)[1]
       local body = utils.node_children_by_name("body", current_node)[1]
+      local comments = utils.node_get_descendants_by_type(current_node, "comment")
+      local has_comments = #comments > 0
 
-      if (utils.node_line_count(body) == 1) then
+      if (not has_comments and utils.node_line_count(body) == 1) then
         return { target = current_node, parameters = parameters, body = body }
       end
     end
