@@ -44,9 +44,9 @@ Thus if the cursor position is contained within multiple AST nodes that could be
 
 shapeshifter take a conservative approach, not trying to do a rewrite if it's not certain it's what you wanted. If there are comments in the code chances are it won't know where to put the comments on the rewrite, so it avoids doing anything.
 
-## Plans
+## Features
 
-Not much is implemented yet, but plan is to be able to transition between:
+Not much is implemented yet, but we already support the followings for the ruby language:
 
  - endless method <-> single line method &#x2705;
  - single body condition <-> postfix condition &#x2705;
