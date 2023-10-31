@@ -42,6 +42,8 @@ shapeshifter utilises treesitter to get access to the document AST. It starts fr
 
 Thus if the cursor position is contained within multiple AST nodes that could be transformed, the transformation will only happen for the innermost node. For example a method might be transformed to be endless method, or the argument list might be transformed to be multi line. As the argument list is contained by the method, that is the one that will be executed. 
 
+shapeshifter take a conservative approach, not trying to do a rewrite if it's not certain it's what you wanted. If there are comments in the code chances are it won't know where to put the comments on the rewrite, so it avoids doing anything.
+
 ## Plans
 
 Not much is implemented yet, but plan is to be able to transition between:
