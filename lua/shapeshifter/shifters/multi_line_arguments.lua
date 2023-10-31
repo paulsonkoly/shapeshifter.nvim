@@ -1,16 +1,17 @@
 local utils = require("shapeshifter.utils")
 
---[[ foo(a, b)                 ->         foo(a,
---                                            b)
+--[[ foo(a,                     ->                   foo(a, b)
+--       b)
 --]]
 local multi_line_arguments = {
   match = function(current_node)
     if current_node:type() == "argument_list" then
       local all_single_line_arguments = true
       local arguments = {}
+      local comments = utils.node_get_descendants_by_type(current_node, "comment")
 
       -- otherwise single line arguments
-      if utils.node_line_count(current_node) <= 1 then
+      if utils.node_line_count(current_node) <= 1 or #comments > 0 then
         return nil
       end
 
