@@ -1,7 +1,7 @@
 local utils = require("shapeshifter.utils")
 
---[[ foo(a,           -->                foo(a, b)
---       b)
+--[[ foo(a, b)              -->                foo(a, 
+--                                                 b)
 --]]
 local single_line_arguments = {
   match = function(current_node)
@@ -17,6 +17,9 @@ local single_line_arguments = {
         if parameter:named() then
           arguments[#arguments + 1] = parameter
         end
+      end
+      if #arguments <= 1 then
+        return nil
       end
 
       return { target = current_node, arguments = arguments }
