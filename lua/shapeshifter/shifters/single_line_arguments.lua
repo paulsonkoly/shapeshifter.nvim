@@ -1,6 +1,6 @@
 local utils = require("shapeshifter.utils")
 
---[[ foo(a, b)              -->                foo(a, 
+--[[ foo(a, b)              -->                foo(a,
 --                                                 b)
 --]]
 local single_line_arguments = {
@@ -22,24 +22,33 @@ local single_line_arguments = {
         return nil
       end
 
-      return { target = current_node, arguments = arguments }
+      -- look up the full method call and rewrite that too, in order to avoid whitspace problems between
+      -- the argument list and the method name
+      local method_call = current_node:parent()
+
+      if (method_call and method_call:type() == "call") then
+        local method_name = utils.node_children_by_name("method", method_call)
+
+        return { target = method_call, arguments = arguments, method_name = method_name[1] }
+      end
     end
   end,
 
   shift = function(data)
-    local node, arguments = data.target, data.arguments
-    local _, indent_column, _, _ = node:range()
+    local node, arguments, method_name = data.target, data.arguments, data.method_name
+    local _, _, _, indent_column = method_name:range()
     local indent = (' '):rep(indent_column + 1)
 
-    local replacement = { }
+    local replacement = {}
+    local line = utils.node_rows(method_name)[1]
     for ix, parameter in ipairs(arguments) do
       local parameter_text = utils.node_rows(parameter)[1]
 
-      local line = ix == 1 and "(" or indent .. ""
+      line = ix == 1 and line .. "(" or indent .. ""
       line = line .. parameter_text
       line = line .. (ix < #arguments and "," or ")")
 
-      replacement[#replacement+1] = line
+      replacement[#replacement + 1] = line
     end
 
     utils.node_replace_with_lines(node, replacement)

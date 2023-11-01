@@ -50,4 +50,23 @@ describe("single line arguments", function()
         result)
     end)
   end)
+
+  describe("without parenthesis around the argument list", function()
+    local lines = { "foo a, b, c" }
+    buf_set_content(lines)
+    vim.api.nvim_win_set_cursor(0, { 1, 5 })
+
+    it("adds the parenthesis after the method name", function()
+      sh.shiftshapes()
+
+      local result = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+      assert.same({
+        "foo(a,",
+        "    b,",
+        "    c)"
+      }, result)
+    end)
+  end)
+
+
 end)
