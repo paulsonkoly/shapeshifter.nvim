@@ -28,27 +28,41 @@ local single_line_arguments = {
 
       if (method_call and method_call:type() == "call") then
         local method_name = utils.node_children_by_name("method", method_call)
+        local block = utils.node_children_by_name("block", method_call)
 
-        return { target = method_call, arguments = arguments, method_name = method_name[1] }
+        return { target = method_call, arguments = arguments, method_name = method_name[1], block = block[1] }
       end
     end
   end,
 
   shift = function(data)
-    local node, arguments, method_name = data.target, data.arguments, data.method_name
+    local node, arguments, method_name, block = data.target, data.arguments, data.method_name, data.block
     local _, _, _, indent_column = method_name:range()
     local indent = (' '):rep(indent_column + 1)
 
     local replacement = {}
     local line = utils.node_rows(method_name)[1]
+    local block_lines = {}
+    local block_header = ""
+    if block then
+      block_lines = utils.node_rows(block)
+      block_header = " " .. utils.node_rows(block)[1]
+    end
+
     for ix, parameter in ipairs(arguments) do
       local parameter_text = utils.node_rows(parameter)[1]
 
-      line = ix == 1 and line .. "(" or indent .. ""
+      line = ix == 1 and line .. "(" or indent
       line = line .. parameter_text
-      line = line .. (ix < #arguments and "," or ")")
+      line = line .. (ix < #arguments and "," or ")" .. block_header)
 
       replacement[#replacement + 1] = line
+    end
+
+    for ix, block_line in ipairs(block_lines) do
+      if ix > 1 then
+        replacement[#replacement + 1] = block_line
+      end
     end
 
     utils.node_replace_with_lines(node, replacement)

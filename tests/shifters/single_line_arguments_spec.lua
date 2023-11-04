@@ -68,5 +68,20 @@ describe("single line arguments", function()
     end)
   end)
 
+  describe("with a block after the argument list", function()
+    local lines = { "foo(a, b, c) { puts 'foo' } " }
+    buf_set_content(lines)
+    vim.api.nvim_win_set_cursor(0, { 1, 5 })
 
+    it("puts the comment after the call", function()
+      sh.shiftshapes()
+
+      local result = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+      assert.same({
+        "foo(a,",
+        "    b,",
+        "    c) { puts 'foo' } " },
+        result)
+    end)
+  end)
 end)
