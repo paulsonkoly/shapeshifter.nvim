@@ -46,7 +46,7 @@ local single_line_arguments = {
     local block_header = ""
     if block then
       block_lines = utils.node_rows(block)
-      block_header = " " .. utils.node_rows(block)[1]
+      block_header = " " .. block_lines[1]
     end
 
     for ix, parameter in ipairs(arguments) do
